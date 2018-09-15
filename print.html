@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <title>Print</title>
+
+        <link rel="stylesheet" type="text/css" href="styles.css">
+		<script type="text/javascript" src="scripts.js"></script>
+    </head>
+    
+	<body style="margin-left:5px" onload="fillPrintReport()">
+								   
+		<table id="paitentHistory"style="width:50%;height:80%;display:inline-table;margin:3px">
+			<tr>
+				<th colspan=2>Paitent History</th>
+			</tr>
+			<tr>
+				<td style="width:40%">Gestational Age</td>
+				<td id="history1"></td>
+			</tr>
+			<tr>
+				<td>Age in hours</td>
+				<td id="history2"></td>
+			</tr>
+			<tr>
+				<td>Sentinal events</td>
+				<td id="history3"></td>
+			</tr>
+			<tr>
+				<td>Apgar @10 mins</td>
+				<td id="history4"></td>
+			</tr>
+			<tr>
+				<td>Worst cord gas</td>
+				<td id="history5"></td>
+			</tr>
+			<tr>
+				<td>Infant cord gas</td>
+				<td id="history6"></td>
+			</tr>
+			<tr>
+				<td>CPR/Epinephrine</td>
+				<td id="history7"></td>
+			</tr>	
+			<tr>
+				<td>Continued need for assisted vent @10 mins</td>
+				<td id="history8"></td>
+			</tr>			
+		</table>	
+
+		<table id="recomPrint"style="width:50%;height:80%;display:inline-table;margin:3px">
+			<tr>
+				<th>Recommendations</th>
+			</tr>
+			<tr>
+				<td id="recom1"></td>
+			</tr>
+			<tr>
+				<td id="recom2"></td>
+			</tr>
+			<tr>
+				<td id="recom3"></td>
+			</tr>
+			<tr>
+				<td id="recom4"></td>
+			</tr>
+			<tr>
+				<td id="recom5"></td>
+			</tr>
+		</table>
+
+		<table id="neuroEval"style="width:50%;height:80%;display:inline-table;margin:3px">
+			<tr>
+				<th colspan=2>Neuro Evaluation</th>
+			</tr>
+            <tr>
+                <td style="width:40%">Time of Life at Neuro Exam</td>
+                <td id="neuro00"></td>
+            </tr>
+            <tr>
+                <td style="width:40%">Seizures</td>
+                <td id="neuro01"></td>
+            </tr>
+			<tr>
+				<td style="width:40%">Level of Consciousness</td>
+				<td id="neuro1"></td>
+			</tr>
+			<tr>
+				<td>Spontaneous Activity</td>
+				<td id="neuro2"></td>
+			</tr>
+			<tr>
+				<td>Posture</td>
+				<td id="neuro3"></td>
+			</tr>
+			<tr>
+				<td>Tone</td>
+				<td id="neuro4"></td>
+			</tr>
+			<tr>
+				<td>Suck</td>
+				<td id="neuro5"></td>
+			</tr>
+			<tr>
+				<td>Moro</td>
+				<td id="neuro6"></td>
+			</tr>
+			<tr>
+				<td>Gag</td>
+				<td id="neuro7"</td>
+			</tr>	
+		</table>
+
+		<table id="neuroResultPrint"style="width:50%;height:80%;display:inline-table;margin:3px">
+			<tr>
+				<th>Likely Neuro Assessment Result</th>
+			</tr>
+			<tr>
+				<td id="assessmentPrint"></td>
+			</tr>
+		</table>	
+
+		<table id="neuroResultPrint"style="width:50%;height:80%;display:inline-table;margin:3px">
+			<tr>
+				<th colspan=2>Additional Comments</th>
+			</tr>
+			<tr>
+				<td colspan=2; id="commentPrint"></td>
+			</tr>
+			<tr>
+				<td>MD Signature</td>
+				<td>Date/Time</td>
+			</tr>
+		</table>	
+
+		<div id="printButton" style="margin-bottom:20px;margin-left:43%">
+			<input id="printConfirm" type="Button" value="Print" onClick="printReport1();">
+			<input id="printCancel" type="Button" value="Cancel" onClick="window.close();">
+		</div>
+
+<script>
+window.onload = function () {
+var url = document.location.href,
+params = url.split('?')[1].split('&'),
+data = {}, tmp;
+for (var i = 0, l = params.length; i < l; i++) {
+    tmp = params[i].split('=');
+    data[tmp[0]] = tmp[1];
+    }
+
+    document.getElementById('history1').innerHTML = decodeURIComponent(data.gest_age);
+    document.getElementById('history2').innerHTML = decodeURIComponent(data.age);
+    document.getElementById('history3').innerHTML = decodeURIComponent(data.sentEvent);
+    document.getElementById('history4').innerHTML = decodeURIComponent(data.apgar);
+    document.getElementById('history5').innerHTML = decodeURIComponent(data.cordPH);
+    document.getElementById('history6').innerHTML = decodeURIComponent(data.infantPH);
+    document.getElementById('history7').innerHTML = decodeURIComponent(data.cpr);
+    document.getElementById('history8').innerHTML = decodeURIComponent(data.assistVent);
+    
+    params = decodeURIComponent(data.recom).split('|');
+    if((params[1]!='')&& (params.length>=2))
+        document.getElementById('recom1').innerHTML = params[1];
+    else
+        document.getElementById('recom1').style.display = "none";
+    if((params[2]!='')&&(params.length>=3))
+        document.getElementById('recom2').innerHTML = params[2];
+    else
+        document.getElementById('recom2').style.display = "none";
+    if((params[3]!='')&&(params.length>=4))
+        document.getElementById('recom3').innerHTML = params[3];
+    else
+        document.getElementById('recom3').style.display = "none";
+    if((params[4]!='')&&(params.length>=5))
+        document.getElementById('recom4').innerHTML = params[4];
+    else
+        document.getElementById('recom4').style.display = "none";
+    if((params[5]!='')&&(params.length>=6))
+        document.getElementById('recom5').innerHTML = params[5];
+    else
+        document.getElementById('recom5').style.display = "none";
+
+    
+    
+    document.getElementById('neuro00').innerHTML = decodeURIComponent(data.TimeLife);
+    document.getElementById('neuro01').innerHTML = decodeURIComponent(data.seizures);
+    document.getElementById('neuro1').innerHTML = decodeURIComponent(data.LevelOfConsciousness);
+    document.getElementById('neuro2').innerHTML = decodeURIComponent(data.SpontaneousActivity);
+    document.getElementById('neuro3').innerHTML = decodeURIComponent(data.Posture);
+    document.getElementById('neuro4').innerHTML = decodeURIComponent(data.Tone);
+    document.getElementById('neuro5').innerHTML = decodeURIComponent(data.Suck);
+    document.getElementById('neuro6').innerHTML = decodeURIComponent(data.Moro);
+    document.getElementById('neuro7').innerHTML = decodeURIComponent(data.Gag);
+    document.getElementById('assessmentPrint').innerHTML = decodeURIComponent(data.NeuroRes);
+    document.getElementById('commentPrint').innerHTML = decodeURIComponent(data.comments);
+    }
+    </script>
+    </body>
+</html>

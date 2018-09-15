@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <title>Print</title>
+
+        <link rel="stylesheet" type="text/css" href="styles.css">
+		<script type="text/javascript" src="scripts.js"></script>
+    </head>
+    
+	<body style="margin-left:5px" onload="fillPrintNeuroReport()">
+        
+
+		<table id="neuroEval"style="width:50%;height:80%;display:inline-table;margin:3px">
+			<tr>
+				<th colspan=2>Neuro Evaluation</th>
+			</tr>
+            <tr>
+                <td style="width:40%">Time of Life at Neuro Exam</td>
+                <td id="neuro00"></td>
+            </tr>
+            <tr>
+                <td style="width:40%">Seizures</td>
+                <td id="neuro01"></td>
+            </tr>
+			<tr>
+				<td style="width:40%">Level of Consciousness</td>
+				<td id="neuro1"></td>
+			</tr>
+			<tr>
+				<td>Spontaneous Activity</td>
+				<td id="neuro2"></td>
+			</tr>
+			<tr>
+				<td>Posture</td>
+				<td id="neuro3"></td>
+			</tr>
+			<tr>
+				<td>Tone</td>
+				<td id="neuro4"></td>
+			</tr>
+			<tr>
+				<td>Suck</td>
+				<td id="neuro5"></td>
+			</tr>
+			<tr>
+				<td>Moro</td>
+				<td id="neuro6"></td>
+			</tr>
+			<tr>
+				<td>Gag</td>
+				<td id="neuro7"</td>
+			</tr>	
+		</table>
+
+		<table id="neuroResultPrint"style="width:50%;height:80%;display:inline-table;margin:3px">
+			<tr>
+				<th>Likely Neuro Assessment Result</th>
+			</tr>
+			<tr>
+				<td id="assessmentPrint"></td>
+			</tr>
+		</table>	
+
+
+		<div id="printButton" style="margin-bottom:20px;margin-left:43%">
+			<input id="printConfirm" type="Button" value="Print" onClick="printReport1();">
+			<input id="printCancel" type="Button" value="Cancel" onClick="window.close();">
+		</div>
+
+<script>
+window.onload = function () {
+var url = document.location.href,
+params = url.split('?')[1].split('&'),
+data = {}, tmp;
+for (var i = 0, l = params.length; i < l; i++) {
+    tmp = params[i].split('=');
+    data[tmp[0]] = tmp[1];
+    }
+    document.getElementById('neuro00').innerHTML = decodeURIComponent(data.TimeLife);
+    document.getElementById('neuro01').innerHTML = decodeURIComponent(data.seizures);
+    document.getElementById('neuro1').innerHTML = decodeURIComponent(data.LevelOfConsciousness);
+    document.getElementById('neuro2').innerHTML = decodeURIComponent(data.SpontaneousActivity);
+    document.getElementById('neuro3').innerHTML = decodeURIComponent(data.Posture);
+    document.getElementById('neuro4').innerHTML = decodeURIComponent(data.Tone);
+    document.getElementById('neuro5').innerHTML = decodeURIComponent(data.Suck);
+    document.getElementById('neuro6').innerHTML = decodeURIComponent(data.Moro);
+    document.getElementById('neuro7').innerHTML = decodeURIComponent(data.Gag);
+    document.getElementById('assessmentPrint').innerHTML = decodeURIComponent(data.NeuroRes);
+
+    }
+    </script>
+    </body>
+</html>

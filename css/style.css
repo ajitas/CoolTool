@@ -1,0 +1,146 @@
+/*.container {max-width: 980px;}*/
+.logopart{width:100%;float:left;margin:10px 0px 15px 0px;}
+.logo{width:100%;float:left;font-size: 44px;color: #414745;}
+.babycare-form{width:100%; float: left; background:url(../images/babycare-index.jpg) no-repeat top; background-size:cover;padding:30px 10px; margin-bottom:30px;}
+.babycare-form input,textarea{width: 100%;float: left;padding: 10px 10px;border: solid 1px #fff;border-radius: 3px;background: rgba(255, 255, 255, 0.75);color: #000;outline: none;resize: none;}
+
+.babycare-form textarea{margin-bottom: 27px;}
+
+.babycare-form2{width:100%; float: left;}
+
+.babycare-form2 textarea{
+width: 100%;
+    float: left;
+    padding: 10px 10px;
+    border: 1px solid #74827D;
+    background-color: #ECF1F7;
+    resize: none;margin-bottom: 27px;}
+
+.buttonsubmit{width:100%;float:left;margin-top: 70px;text-align:center;}
+.buttonsubmit input[type=submit]{background: #395393;border: solid 1px #0c5a40;padding: 10px 73px;color:#fff;font-size: 17px;border-radius: 5px;}
+.buttonsubmit input:hover[type=submit]{background: #000;border: solid 1px #000;}
+
+.innerform{width:100%;float:left;m;margin-bottom: 31px;padding-top: 25px;}
+.buildformpart{width:100%; float:right;}
+	
+	#header h3{
+    background: #98b4d2;
+    color: #000000;
+    padding: 9px 8px;
+    margin: 0px;
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    border: 1px solid #74827D;
+    /* margin-bottom: 10px; */
+    }
+	
+.textpartblockyb{width:100%;float:left;font-size: 15px;line-height: 25px;padding-top: 20px;}	
+.textpartrightimage{ width:100%; float:left;}
+.textpartrightimage img{ width:100%;}	
+	
+.buildformpart .rowform{
+background-color: #ECF1F7;
+line-height: 35px;
+margin: 2px 0px;
+width: 100%;
+padding-left: 5px;
+border: 1px solid #74827D;
+float: left;
+}
+.radcol{color:#FF0000;}
+	
+.buildformpart .rowform .textpart{ width:55%; float: left;}	
+.ques014 {float: right;}	
+.buildformpart .rowform .textfield{ width:43%; float: right;}
+.numb{margin: 2px 0px;border-color: rgb(227, 242, 237);width: 97%;border: solid 1px #96a7a1;padding: 0px 5px;height: 36px;}
+.numb:disabled{color: grey}  
+
+.numb0{margin: 2px 0px;
+    border-color: rgb(227, 242, 237);
+    width: 48%!important;
+    border: solid 1px #96a7a1;
+    padding: 0px 5px;
+    height: 37px!important;}
+.numb0:disabled{color: grey} 
+.rightform55{width:100%; float: left;}
+		
+.boxrecom{width:100%; float:left; padding:10px; min-height:200px; color:#000;border: 1px solid #74827D;
+    background-color: #ECF1F7; margin-top:2px;}
+.formbutpart{width:100%;float:left;margin: 10px 0px;}
+.formbutpart .left{width: 37%;float:left;}	
+.formbutpart .right{width: 63%;float:right; text-align:right;}		
+.paddingsalect{padding: 9px 0px;}	
+.butstyle{background-color: #395393;
+    font-size: 15px;
+    padding: 6px 6px;
+    border-radius: 4px;
+    color: #fff;}	
+	
+.butstyle:hover{background-color: #2B406E;}	
+.butstyle:disabled{background-color: #abbede;}	
+#recoCooling{position: relative;
+    width: 100%;
+    float: left;}	
+#recoCooling .clockbaby{position:absolute;top:-20px;right: -5px;}
+
+
+
+	
+.footer-copy{width:100%; float:left; text-align:center; font-size:13px; background:#395393; color:#fff; padding:10px 0px;}
+
+@media (max-width:768px){
+
+.babycare-form input, textarea { margin-bottom:20px;}
+.buttonsubmit {margin: 20px 0px;}
+.map-modal-container iframe {
+    left: 5%!important;
+    width: 92%!important;
+}
+}
+
+
+
+@media (max-width:480px){
+.butstyle{padding: 6px 10px;width: 98%;}
+#recoCooling .clockbaby {
+    position: absolute;
+    top: -180px;
+    right: 74px;
+}
+#recoCooling {
+    position: relative;
+    margin-top: 170px;
+}
+
+
+
+}
+
+
+@media (max-width:360px){
+
+#recoCooling .clockbaby {position: absolute;top: -180px;right: 74px;}
+#recoCooling {position: relative;margin-top: 170px;}
+
+
+
+}
+
+
+
+
+
+
+@media (min-width: 1200px){
+/*.container {max-width: 980px;}*/
+}
+
+
+
+
+
+
+
+
+

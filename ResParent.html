@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+		<script type="text/javascript" src="scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Tangerine">
+                <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    
+	<body style="margin-left:5%;margin-right:5%" onload="">
+        <div id="nav-placeholder">
+            
+        </div>
+
+        <div id="resParent" class="resource">
+            <a style="text-decoration:underline;" href="content/parentFAQ.pdf" target="_blank">FAQ for Parents</a>
+        </div>
+        <div name="footer" class="footer">
+            BETA VERSION IS ONLY FOR USER TESTING OUTSIDE OF CLINICAL SETTING.<br>
+            Disclaimer: These suggested guidelines are not a substitute for clinical judgement.
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>  This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+            <!--<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>-->
+        </div>
+
+<script>
+    $(function(){
+      $("#nav-placeholder").load("navigation.html",function(){
+                                 $(document).ready(function () {
+                                                   $('.btnn4').addClass('active');
+                                                   });
+                                 });
+      });
+      
+    </script>
+    </body>
+</html>

@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <title>HIE Calculator</title>
+
+
+        <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+		<link href="css/style.css" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- OLD SCRIPT  -->
+        <script type="text/javascript" src="scripts.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+        <script src="xepOnline.jqPlugin.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Tangerine">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+
+        <!-- OLD SCRIPT  -->
+
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    
+	<body>
+        <div style="margin-left:5%;margin-right:5%">
+        <div id="nav-placeholder"></div>
+	
+		
+			<div class="textpartblockyb">
+				<div id="homeHeader" class="col-md-12">
+					This tool is intended to promote <b><u>identification and early referral</u></b> of babies at risk for hypoxic ischemic encephalopathy (HIE). <u><b>It does not determine if a baby should be cooled.</b></u> The decision to proceed with cooling should only be made after consultation with a  Regional Cooling Center (ref. 
+					<a href="content/ccs_letter.pdf" target="_blank"> CCS numbered letter</a>), based upon their institutional criteria. These recommendations are based on the HIE 
+					<a href="https://www.cpqcc.org/qi-tool-kits/early-screening-and-identification-candidates-neonatal-therapeutic-hypothermia-toolkit" 
+					target="_blank">early screening toolkit </a> published by the <a href="https://www.cpqcc.org/" 
+					target="_blank"> California Perinatal Quality Care Collaborative (CPQCC) </a>
+				</div>
+			</div>
+            
+			<div id="home">
+				<form  id ="formybi" name="formybi" method="post" >
+					<div class="innerform">
+						<div  class="row">
+							<div id="queset1" class="col-md-5">
+								<div class="buildformpart">
+									<div id="header"><h3>Enter details below</h3></div>
+									<div id="quesGA" class="rowform">
+										<div id="GABlock"  class="textpart">Gestational Age >= 35wks <span class="radcol">*</span> 
+											<div class="ques014"><a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png"></a><span class="tooltiptext">Best estimate of gestational age in weeks</span></div>
+										</div>
+										<div id="GA" class="textfield">
+											<input type="radio" name="f_GA"  id="f_GA_Y" value="1" onclick="checkRadioButt('errorclsga','' );"> Yes
+											<input type="radio" name="f_GA" id="f_GA_N" value="0" onclick="checkRadioButt('errorclsga','' );"> No
+											<input type="radio" name="f_GA" id="f_GA_NA"  value="2" checked="" onclick="checkRadioButt('errorclsga','Please estimate the gestational age using Ballard Maturational Assessment' );"> unknown
+											<div class="errorcls" id="errorclsga"></div>
+										</div>
+									</div>
+										
+									<div id="quesAge" class="rowform">
+										<div id="quesAge" class="textpart">Age in Hours <span class="radcol">*</span> 
+											<div class="ques014">
+												<a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png"></a>
+                                                <span class ="tooltiptext">Hour of life to the nearest 0.1 hour</span>
+											</div>
+										</div>
+										<div class="textfield">
+											<input   min="0" max="1000" step="0.10" name="f_ques12" onkeypress='return isNumberKey(event)' onfocus="handleChange(this, 'errorclsage', 0, 1000,'', 1, 0, 0);"  oninput="handleChange(this, 'errorclsage', 0, 1000,'', 1, 0, 0);"    id="f_age" class="numb" >
+											<div class="errorcls" id="errorclsage"></div>
+										</div>
+									</div>
+								
+									<div class="rowform">
+										<div class="textpart">Acute Perinatal Events 
+											<div class="ques014"><a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png"></a>
+                                            <span class="tooltiptext">Please select all that apply. This is a list  of sentinel events known to significantly increase risk for HIE</span></div>
+										</div>
+                                        <div class="textfield">
+										<div id="f_events" class="numb" style="line-height: 15px;">
+												<label for="val1"><input type="checkbox" checked="" id="val1" value="1" selected=""> Unknown</label></br>
+												<label for="val2"><input type="checkbox" id="val2" value="2"> Placental Abruption</label></br>
+												<label for="val3"><input type="checkbox" id="val3" value="3"> Cord Prolapse</label></br>
+												<label for="val4"><input type="checkbox" id="val4" value="4"> Uterine Rupture</label></br>
+												<label for="val5"><input type="checkbox" id="val5" value="5"> Severe Fetal Bradycardia</label></br>
+												<label for="val7"><input type="checkbox" id="val7" value="7"> Amniotic Embolus</label></br>
+												<label for="val8"><input type="checkbox" id="val8" value="8"> Maternal Cardiovascular Collapse</label></br>
+												<label for="val9"><input type="checkbox" id="val9" value="9"> Fetal Exsanguination</label></br>
+												<label for="val6"><input type="checkbox" id="val6" value="6"> None of the above</label></br>
+											
+										</div>
+                                        </div>
+									</div>
+										
+									<div id="ques22" class="rowform">
+										<div class="textpart">Apgar @10min
+											<div class="ques014">
+												<a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png"></a>
+                                                <span class = "tooltiptext">Apgar score at 10 minutes of life, if available</span>
+											</div>
+										</div>
+										<div class="textfield">
+											<input min="0" max="10" name="f_ques22" onkeypress='return isNumberKey(event)'  onfocus="handleChange(this, 'errorclsapgar', 0, 10, '', 0, 1,0);" oninput="handleChange(this, 'errorclsapgar', 0, 10, '', 0, 1,0);" onfocusout="handleFocusOut('errorclsapgar');"  id="f_APGAR" class="numb" pattern="[0-9]*" >
+											<div class="errorcls" id="errorclsapgar"></div>
+										</div>
+									</div>
+										
+									<div class="rowform">
+										<div class="textpart">Worst Cord Blood Gas
+											<div class="ques014"><a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png"></a>
+                                            <span class = "tooltiptext">Worse of the arterial and venous cord blood gas, if available</span></div>
+										</div>
+										<div class="textfield">
+											<input  min="6" max="8" step="0.01" placeholder="pH" name="f_ques23_1" id="f_cordpH" onkeypress='return isNumberKey(event)' oninput="handleChange(this, 'errorclswbgph', 6, 8, 'pH: ', 0,0, 0);" onfocus="handleChange(this, 'errorclswbgph', 6, 8, 'pH: ', 0,0, 0);"  onfocusout="handleFocusOut('errorclswbgph');" class="numb0">
+											<div class="errorcls" id="errorclswbgph"></div>
+											<input min="-55" max="55" step="0.01" placeholder="BaseDef" name="f_ques23_2" id="f_cordBE" onkeypress='return isNumberKey(event)' oninput="handleChange(this, 'errorclswbgdef', -55, 55, 'BaseDef: Enter 55 if uncalculatable OR', 0, 0, 1);" onfocus="handleChange(this, 'errorclswbgdef', -55, 55, 'BaseDef: Enter 55 if uncalculatable OR', 0, 0, 1);" onfocusout="handleFocusOut('errorclswbgdef');" class="numb0">
+											<div class="errorcls" id="errorclswbgdef"></div>
+										</div>
+									</div>
+										
+									<div class="rowform">
+										<div class="textpart">Infant Blood Gas within 1hr of life 
+											<div class="ques014"><a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png"></a>
+                                            <span class="tooltiptext">Infant gas within one hour of life, if available</span></div>
+										</div>
+										<div class="textfield">
+											<input  min="6" max="8"  step="0.01" placeholder="pH" name="f_ques26_1" id="f_infantpH" onkeypress='return isNumberKey(event)' oninput="handleChange(this, 'errorclsibgph', 6, 8, 'For pH', 0, 0, 0);" onfocus ="handleChange(this, 'errorclsibgph', 6, 8, 'For pH', 0, 0, 0);" onfocusout="handleFocusOut('errorclsibgph');" class="numb0" >
+											<div class="errorcls" id="errorclsibgph"></div>
+											<input min="-55" max="55" step="0.01"  placeholder="BaseDef" name="f_ques26_2" id="f_infantBE" onkeypress='return isNumberKey(event)' oninput="handleChange(this, 'errorclsibgdef', -55, 55, 'BaseDef: Enter 55 if uncalculatable OR', 0, 0, 1);" onfocus="handleChange(this, 'errorclsibgdef', -55, 55, 'BaseDef: Enter 55 if uncalculatable OR', 0, 0, 1);" onfocusout="handleFocusOut('errorclsibgdef');"class="numb0"  >
+											<div class="errorcls" id="errorclsibgdef"></div>
+										</div>
+									</div>
+										
+									<div class="rowform">
+										<div class="textpart">CPR/Epinephrine
+											<div class="ques014"><a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png"></a>
+                                            <span class="tooltiptext">select measures for resuscitation</span></div>
+										</div>
+										<div class="textfield"><!-- onmousemove="showIETooltip();" onmouseout="hideIETooltip();" -->
+											<select id="f_cpr" class="numb paddingsalect" >
+												<option title="Unknown"  value="1" selected="">Unknown</option>
+												<option title="CPR"  value="2">CPR</option>
+												<option title="Epinephrine"  value="3">Epinephrine</option>
+												<option title="Both"  value="4">Both</option>
+												<option title="None"  value="5">None</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="rowform">
+										<div class="textpart">Continued need for assisted ventilation at 10 mins of life.
+											<div class="ques014">
+												<a href="#" data-toggle="tooltip" data-placement="right"><img src="images/que.png">
+                                                <span class ="tooltiptext">Any form of positive pressure ventilation (PPV), including intubation, on-going need for bag mask ventilation/CPAP, or CPAP by other devices</span></a>
+											</div>
+										</div>
+										<div id ="vent" class="textfield">
+											<input type="radio"  name="f_vent" id="f_vent_Y" value="1"> Yes
+											<input type="radio"  name="f_vent" id="f_vent_N" value="0" > No
+											<input type="radio"  name="f_vent" id="f_vent_NA" value="2" checked="checked"> unknown
+										</div>
+									</div>
+
+									<div id="gmap" class="map-modal-container" onClick="toggleMap()">
+                                        <a href="javascript:closeFrame();" style="color:white;font-weight:bold;font-size:16">[CLOSE]</a>
+										<iframe class="modal-content" data-src="https://www.google.com/maps/d/embed?mid=1z24iFrGkU3jxoIM0kZlpSyhAP-w"></iframe>
+									</div>
+
+									<div class="formbutpart">
+										<div class="left">
+											<input type="button" class="butstyle" value="Change Input" id="btnClear" disabled="disabled" onClick="clearInput();">
+										</div>
+										<div class="right">
+											<input type="button" id="btnsubmit" onclick="submitPage(this);" class="butstyle" value="Determine Recommendations >>">
+										</div>
+									</div>
+								</div>
+							</div>
+								
+							<div id="recommendation" class="col-md-7">
+								<div class="rightform55">
+									<div id="header">
+									<h3 id="sug1">Recommendations</h3>
+									<h3 id="sug2" style="display:none">Neonatal Neuro Tool	
+										<div id="x" onClick="back2Main();">Back</div></h3>
+								</div>
+								
+								<div  id="reco">
+									<div class="buildformpart">
+										<div class="boxrecom">
+											<ul class="list-unstyled" style="list-style:none">
+												<li id="r2" style="display:none;margin-top:10px;list-style:none"> <span style="font-weight:bold;font-size:16px;background-color:#00d790">SCREENING CRITERIA <u>NOT</u> MET</span> <br> Current evidence does not support the initiation of cooling therapy in infants <35 weeks GA.<a href="content/cooling_criteria.png" target="_blank"><i>Learn More. </i></a><br><br><b>Note:</b> Contact <a href ="#" onClick="callCoolingCenter();" >Cooling Center</a> to discuss any possible qualifying exceptions or special circumstances for cooling. Recommend performing <a href="content/Template-Questionnaire.pdf" target="_blank"> Neurological Assessment</a> prior to the consultation.<br><br><b> Ongoing trials for cooling in infants with GA 33 0/7 to 35 6/7:</b> <br> Preemie Hypothermia for Neonatal encephalopathy (NCT01793129)<br> Contact: Stanford University <br> Palo Alto, California, United States, 94304 <br> Contact: Krisa P. Van Meurs, MD:  xxx-xx-xxxx </li>
+												<li id="r3" style="display:none;margin-top:10px;list-style:none"><span style="font-weight:bold;font-size:16px;background-color: #00d790">SCREENING CRITERIA <u>NOT</u> MET</span><a href="content/cooling_criteria.png" target="_blank"><i>Learn Why. </i></a><br>Current evidence does not support the initiation of cooling therapy beyond 6 hours of life.</li>
+												<li id="r3_1" style="display:none;margin-top:10px;list-style:none"> However, infant has risk factors for Neonatal Encephalopathy. Recommend <a href="content/Template-Questionnaire.pdf" target="_blank"> Neurological assessment</a> and clinical correlation.</li>
+												<li id="r4" style="display:none;margin-top:10px;list-style:none"><b> Note:</b> Infant may have met criteria if age were <=6hr. <a href ="#" onClick="callCoolingCenter();" >Contact Cooling Center</a> to discuss any possible qualifying exceptions or special circumstances for cooling. Recommend performing <a href="content/Template-Questionnaire.pdf" target="_blank"> Neurological Assessment</a> prior to the consultation.</li>
+												<li id="r5" style="display:none;margin-top:10px;list-style:none"><span style="font-weight:bold;font-size:16px;background-color: #00d790">SCREENING CRITERIA <u>NOT</u> MET</span><a href="content/cooling_criteria.png" target="_blank"><i>Learn Why. </i></a> <br> Recommend clinical correlation. Continue care as appropriate.</li>
+											</ul>
+											<div id="recoCooling" style="display:none;list-style:none">
+												<div id="childdrawage" class="clockbaby"><img id="childrawImg" src="images/clock1.png"></div>
+												<ul class="list-unstyled" style="list-style:none">
+                                                    <li id="r8"  style="font-weight:bold;margin-left:0px;list-style:none"> <span style="background-color: yellow;font-size:16px;padding: 5px;">AT RISK.</span></li>
+													<li id="r9"  style="font-weight:bold;list-style:none"> <span style="background-color: yellow; font-size:16px">Incomplete information.<!--Based on <u>INCOMPLETE</u> information. SCREENING CRITERIA <u>NOT</u> MET.</span></li>-->
+												</ul>
+                                                
+												<span style="font-weight:bold;margin-left:10px;">Suggested Actions: </span>
+												<ol style="margin-left:-15px;">
+													<li id="r10" >If possible, gather missing birth and resuscitation history<br></li>
+													<li id="r6">Request umbilical cord gas, if availble</li>
+													<li id="r6_1">Request umbilical cord gas, if availble, <u>OR</u>
+																<br>Consider obtaining infant blood gas</li>
+													<li id="r7">Consider obtaining infant blood gas</li>
+													<li id="r7_1">Consider obtaining infant blood gas, if validity of cord gas result is uncertain
+																<br>(prolonged flow arrest/complete knots)</li>
+													<li id="r11"> Perform neurologic assessment after resuscitation.<br>Use  <input type="Button" id="btn_neurotool" class="butstyle" value="NeuroTool" onClick="performNeuroExam();"> or print form<a href="content/Template-Questionnaire.pdf" target="_blank"> <img src="images/print.ico" style="height:27px;"></a></li>
+													<div id="neuroResult" style="display:none">
+														<span style="font-size:14px;font-style: italic;margin-left:5px; margin-top:10px; float:left;">Refer the table below for suggested action based on neurologic assessment.<br>For Cooling, consider the <b>worst exam</b> after initial resuscitation</span>
+														<table id="recoTable" style="width:98%;height:80%;display:inline-table;margin:3px;margin-left:3px;">
+														<tr>
+															<th>Neurologic Assessment Result</th>
+															<th>Clinical Suggestions</th>
+														</tr>
+														<tr>
+															<td>Normal</td>
+															<td>Screens negative at <b><i>this</i></b> time. Symptoms may change. You may perform subsequent neuro exam using <a style="text-decoration:underline;" href="neuroanalysis.html" target="_blank">NeuroTool</a>. <b>Continue to monitor</b> as per <a style="text-decoration:underline;" href="content/AppendixE_doNotQualify.pdf" target="_blank">CPQCC guidelines</a>.                                                </td>
+														</tr>
+														<tr>
+															<td>Mild</td>
+															<td>Call cooling center to discuss case.</br> Provide care as per the management guidelines
+															<a href="content/AppendixX_potentialCandiadtes.pdf" target="_blank"> for potential candidates</a>  </td>							
+														</tr>
+														<tr>
+															<td>Moderate to Severe</td>
+															<td>Call cooling center to discuss the need for transfer and cooling.</br> Provide care as per the management guidelines  
+															<a style="text-decoration:underline;" href="content/AppendixX_potentialCandiadtes.pdf" target="_blank"> for potential candidates</a></td>							
+														</tr>
+														<tr>
+															<td>Incomplete Exam</td>
+															<td>Call cooling center to discuss case immediately.</td>							
+														</tr>
+													</table>
+													</div>
+												</ol>
+											</div>  
+										</div>
+									</div>
+								</div>
+
+								<div id="contact_info" class="contact">
+									<ul style="list-style: none;">
+										<li><input type="Button" id="btn_neurotool" class="butstyle" value="Find Regional Cooling Center" onClick="callCoolingCenter();"></li>
+										<span style="margin-left:0px">If directed to cool, see protocols:
+
+											<select name="protocols" id="protocols" accesskey="target">
+												<option value='none' selected>Choose a protocol:</option>
+												<option value ='content/AppendixC_possiblyQualify_v1.pdf' >Management of Cooling Candidate</option>
+												<option value ="content/AppendixD_PassiveCooling.pdf">Passive Cooling Protocol</option>
+												<option value ="content/tip_sheet.pdf" >Tip Sheet</option>
+												<option value ="content/flow_sheet.pdf">Flow Sheet</option>
+											</select>
+											<input type=button class="butstyle" value="Go" onclick="openPdfForProtocol()" />
+
+											<!--<a style="text-decoration:underline;" href="content/AppendixC_possiblyQualify_v1.pdf" target="_blank"> management of Cooling Candidate</a>,<a style="text-decoration:underline;" href="content/tip_sheet.pdf" target="_blank"> tip sheet</a>,
+											<a style="text-decoration:underline;" href="content/AppendixD_PassiveCooling.pdf" target="_blank"> passive cooling protocols </a>,
+											<a style="text-decoration:underline;" href="content/flow_sheet.pdf" target="_blank"> flow sheet </a></span>-->
+									</ul>
+								</div>
+
+								<div id="report" style="display:none;">
+                                    <input type="Button" id="btnReport" style="float:right;margin-top:10px" class="butstyle" value="Print Report" onClick="showPopUp();">
+									<div id="popup">
+										<div id="content">
+											<textarea id="showthis" class="comment" placeholder="Enter additional comments: APGAR scores, lab values, other concerns etc." rows = "3"></textarea>
+											<input id="continue" class="butstyle" style="margin-left:25px;"  type="Button" value="Continue"  onClick="fillPrintReport(); hidePopUp();"/>
+											<input id="cancel" class="butstyle" style="margin-left:25px;" type="Button" value="Cancel" onClick="hidePopUp();">   <!-- link tp pdf content/Template-printForm.pdf-->
+										</div>   
+									</div>
+								</div>
+
+
+								<div id="NeuroExam" class="exam" style="display:none;"> 
+									<div class="ques"style="margin-left:-2px;">
+										<div style="width:180px;float:left">Time of life at neuro exam:</div>
+										<input type="number" min="0" style="width:40px;" id="hour_life"> Hr  
+										<input type="number" min="0" style="width:40px;" id="min_life"> Min
+									</div>						
+									<div class="ques" style="margin-top:4px;margin-left:-2px;">
+										<div class="item" style="width:90px"> <b>Seizures:</b></div>
+										<input type="checkbox" name="f_seizure" id="f_seizure_1" onClick="chkSeizures(this);" value="0"> No known episode
+										<input type="checkbox" name="f_seizure" id="f_seizure_2" onClick="chkSeizures(this);" value="1"> EEG Confirmed
+										<input type="checkbox" name="f_seizure" id="f_seizure_3" onClick="chkSeizures(this);" value="2"> Suspected/Clinical 
+										<input type="text" style="height:30px;width:200px;float:right;margin-top:2px;margin-right:4px;display:none" Placeholder="Explain seizure" id="f_seizureBox">
+									</div>
+									<!-- <div class="ques" style="margin-top:2px;">	 -->
+										<!-- <b>Select characteristics for each row</b> -->
+									<!-- </div> -->
+									<table id="neuroHeader" style="margin-left:-2px;margin-top:4px;height:80%;display:inline-table;">
+										<tr style="border:1px solid #74827D; border-style:solid solid solid solid">
+											<th style="text-align:left;padding:2px;font-size:16px;color:black;font-weight:bold">
+											** Click to select characteristics for each row in the table below
+											</th>
+                                            <th>
+                                            <input type="Button" id="btnChnageView" style="float:right;font-weight:normal;width: 175px;" class="butstyle" value="Switch to detailed view" onClick="changeDisplay('0');"></th>
+										</tr>
+										</table>
+									<div id="overflow" style="width:102%;height:100%">
+                                        <table id="neuroTable" style="width:100%;height:100%;display:inline-table;margin-left:-12px;border-spacing:10px;border-collapse: separate;">
+                                            <tr style="font-size:small;">
+                                                <th rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;">Level of Conciousness</th>
+                                                <td name ="loc1" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Opens eyes and moves with repeated tactile stimulation; appropriately wakes and falls
+                                                    back to sleep">Normal</td>
+                                                <td name="loc2" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Irritable, hyperalert and/or agitated, maintains awake state, may have high pitched cry">Irritable/Hyperalert</td>
+                                                <td name="loc3" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Reduced eye opening and movements to tactile stimulation">Lethargic/Obtunded</td>
+                                                <td name="loc4" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Baby is unresponsive on only responds to painful stimuli, responses are stereotyped">Stupor/Unresponsive</td>
+                                                <td name="loc5" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-normal" target="_blank">See video </a>
+                                                </th>
+                                                <th style ="background-color:#C9D7E7">
+                                                    <!--<a 
+                                                        href="" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-video-moderate" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <!--<a 
+                                                        href="" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                </th>
+                                                
+                                            </tr>
+                                            
+                                            <tr style="font-size:small;">
+                                                <th rowspan="2" style="padding:8px;background-color:#ECF1F7;font-size:medium;" >Spontaneous Activity</th>
+                                                <td name="sa1" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Spontaneous movements">Normal</td>
+                                                <td name="sa2" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Excess movements, jittery, agitated">Jittery/Increased</td>
+                                                <td name="sa3" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Decreased spontaneous movements, may respond to pain/touch">Decreased</td>
+                                                <td name="sa4" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="No spontaneous movements">No Activity</td>
+                                                <td name="sa5" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-normal" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-mild" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                   <!--<a 
+                                                        href="content/video/neurologic-exam-spontaneous-activity-decreased.mp4" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-severe" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                </th>
+                                                
+                                            </tr>
+                                            
+                                            
+                                            <tr style="font-size:small;">
+                                                <th rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;">Posture</th>
+                                                <td name="pos1" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Normal">Normal</td>
+                                                <td name="pos2" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Slight flexion/extension">Slight flexion/extension</td>
+                                                <td name="pos3" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Distal Flexion/Complete Extension">Distal Flexion/Complete Extension</td>
+                                                <td name="pos4" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Decerebrate">Decerebrate</td>
+                                                <td name="pos5" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-normal" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-mild" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-moderate" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <!--<a 
+                                                        href="" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                </th>
+                                                
+                                            </tr>
+                                            
+                                            
+                                            <tr style="font-size:small;">
+                                                <th rowspan="2" style="padding:8px;background-color:#ECF1F7;font-size:medium;">Tone</th>
+                                                <td name="tone1" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Flexed posture of arms and legs that is not fixed">Normal</td>
+                                                <td name="tone2" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Mild excess fisting, high tone in the legs (hypertonia)">Increased</td>
+                                                <td name="tone3" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Frog-legged and/or excess head lag">Hypotonic</td>
+                                                <td name="tone4" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Extreme hypotonia)">Flaccid</td>
+                                                <td name="tone5" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-normal" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-mild" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-moderate" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-severe" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                </th>
+                                                
+                                            </tr>
+                                            
+                                            
+                                            <tr style="font-size:small;">
+                                                <th rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;" >Suck</th>
+                                                <td name="suck1" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Strong coordinated suck">Normal</td>
+                                                <td name="suck2" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Uncoordinated">Uncoordinated</td>
+                                                <td name="suck3" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Infant bites instead of sucking">Weak</td>
+                                                <td name="suck4" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Absent">Absent</td>
+                                                <td name="suck5"style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection ">Cannot Assess</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-video-normal" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <!--<a 
+                                                        href="content/video/neurologic-exam-suck-uncoordinated.mp4" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-moderate" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-video-severe" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                </th>
+                                                
+                                            </tr>
+                                            
+                                            <tr style="font-size:small;">
+                                                <th rowspan="2" style="padding:8px;background-color:#ECF1F7;font-size:medium;" >Moro</th>
+                                                <td name="moro1" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Normal">Normal</td>
+                                                <td name="moro2" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Exagerated">Exagerated</td>
+                                                <td name="moro3"style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Incomplete">Incomplete</td>
+                                                <td name="moro4" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Absent">Absent</td>
+                                                <td name="moro5" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <a 
+                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-moro-video-normal" target="_blank">See video </a>
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <!--<a 
+                                                        href="" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <!--<a 
+                                                        href="content/video/neurologic-exam-moro-incomplete.mp4" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#ECF1F7;">
+                                                    <!--<a 
+                                                        href="" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#ECF1F7;"></th>
+                                                
+                                            </tr>
+                                            
+                                            <tr style="font-size:small;">
+                                                <th  rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;" >Gag</th>
+                                                <td  name="gag1" style="padding:8px;" id="NeuroTableCell" colspan=2 onClick="calculateResult(this);" title="Normal">Normal</td>
+                                                <!-- <td onclick="calculateResult(this);">Normal</td> -->
+                                                <!-- <td onclick="calculateResult(this);">Incomplete</td> -->
+                                                <td  name="gag2" style="padding:8px;" id="NeuroTableCell" colspan=2 onClick="calculateResult(this);" title="Absent">Absent</td>
+                                                <td  name="gag3"style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" style="background-color:#C9D7E7;">
+                                                    <!--<a 
+                                                        href="" target="_blank">See video </a>-->
+                                                </th>
+                                                <th colspan="2" style="background-color:#C9D7E7;">
+                                                    <!--<a 
+                                                        href="" target="_blank">See video </a>-->
+                                                </th>
+                                                <th style="background-color:#C9D7E7;">
+                                                </th>
+                                                
+                                            </tr>
+                                        </table>
+										
+										<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Modal Header</h4>
+		  </div>
+		  <div class="modal-body">
+			<p>Some text in the modal.</p>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+										
+										
+										
+										
+									</div>
+									<div id="neuroQues" style="display:none">
+									<div  class="scrollBlock1" id="scrollBlock"> <!--  -->
+											<div id="span1" class="scroll1" onClick="changeQues(1);">Conciousness</div>
+											<div id="span3" class="scrollDis1" onClick="changeQues(3);">Activity</div>
+											<div id="span5" class="scrollDis1" onClick="changeQues(5);">Posture</div>
+											<div id="span2" class="scrollDis1" onClick="changeQues(2);">Tone</div>
+											<div id="span4" class="scrollDis1" onClick="changeQues(4);">Reflexes</div>
+										  
+										</div>
+										<div class="quesBlock" id="quesBlock1" >
+											<div style="width:98%;padding-bottom:10px;">
+												<span class="h3" >Question 1 of 5 - Assess Level of Consciousness</span>
+											</div>
+											<div>
+												<input type="radio" name="block1" id="block1_1" value="1" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Normal</span> - opens eyes and moves with repeated tactile stimulation; appropriately wakes and falls</br> back to sleep.
+												<a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-normal" target="_blank">
+													See video </a> 
+											</div>
+											<div>
+												<input type="radio" name="block1" id="block1_2" value="2" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Mild</span> - Irritable, hyperalert and/or agitated, maintains awake state, may have high pitched cry
+											</div>
+											<div>
+												<input type="radio" name="block1" id="block1_3" value="3" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Moderate</span> - Reduced eye opening and movements to tactile stimulation. 
+												<a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-video-moderate" target="_blank">
+													See video </a> 
+											</div>
+											<div>
+												<input type="radio" name="block1" id="block1_4" value="4" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Severe</span> - Baby is unresponsive on only responds to painful stimuli, responses are stereotyped
+											</div>
+											<div>
+												<input type="radio" name="block1" id="block1_5" value="0"  checked="checked"  onClick="calculateAns();"> 
+												 <span style="font-weight:bold">Cannot Assess</span> </div>
+										</div>
+
+										<div class="quesBlock" id="quesBlock3" style="display:none"> 
+											<div style="width:98%;padding-bottom:10px;">
+												<span class="h3">Question 2 of 5 - Assess Activity</span>
+											</div>
+											<div>
+												<input type="radio" name="block3" id="block3_1" value="1" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Normal</span> - spontaneous movements <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-normal" target="_blank"> See video </a> </div>
+											<div>
+												<input type="radio" name="block3" id="block3_2" value="2" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Mild</span> - excess movements, jittery, agitated. <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-mild" target="_blank"> See video </a> </div>
+											<div>
+												<input type="radio" name="block3" id="block3_3" value="3" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Moderate</span> - decreased spontaneous movements, may respond to pain/touch</div>
+											<div>
+												<input type="radio" name="block3" id="block3_4" value="4" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Severe</span> - no spontaneous movements. <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-severe" target="_blank"> See video </a></div>
+											<div>
+												<input type="radio" name="block3" id="block3_5" value="0" checked="checked"  onClick="calculateAns();"> 
+												<span style="font-weight:bold">Cannot Assess</span> </div>
+
+										</div>
+										 <div class="quesBlock" id="quesBlock5" style="display:none"> 
+											<div style="width:98%;padding-bottom:10px;">
+												<span class="h3">Question 3 of 5 - Assess Posture</span>
+												<!-- <span class="h3" id="x" style="float:right;"onclick="changeQues(4);">Next</span> -->
+												<!-- <span class="h3" id="x" style="float:right;margin-right:30px" onclick="changeQues(2);">Prev</span> -->
+											</div>
+											<div>
+												<input type="radio" name="block7" id="block7_1" value="1" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Normal</span> <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-normal" target="_blank"> See video </a> </div>
+											<div>
+												<input type="radio" name="block7" id="block7_2" value="2" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Mild</span> - Slight flexion/extension <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-mild" target="_blank"> See video </a></div>
+											<div>
+												<input type="radio" name="block7" id="block7_3" value="3" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Moderate</span> - Distal Flexion/Complete Extension<a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-moderate" target="_blank"> See video </a> </div>
+											<div>
+												<input type="radio" name="block7" id="block7_4" value="4" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Severe</span> -Decerebrate</div>
+											<div>
+												<input type="radio" name="block7" id="block7_5" value="0" checked="checked"  onClick="calculateAns();"> 
+												<span style="font-weight:bold">Cannot Assess</div>
+
+										</div>
+										 <div class="quesBlock" id="quesBlock2" style="display:none">
+											<div style="width:98%;padding-bottom:10px;">
+												<span class="h3">Question 4 of 5 - Assess Tone</span>
+											</div>
+											<div>
+												<input type="radio" name="block2" id="block2_1" value="1" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Normal</span> - flexed posture of arms and legs that is not fixed.  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-normal" target="_blank"> See video </a></div>
+											<div>
+												<input type="radio" name="block2" id="block2_2" value="2" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Mild</span> - mild excess fisting, high tone in the legs (hypertonia).  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-mild" target="_blank"> See video </a></div>
+											<div>
+												<input type="radio" name="block2" id="block2_3" value="3" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Moderate</span> - frog-legged and/or excess head lag (hypotonia).  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-moderate" target="_blank"> See video </a></div>
+											<div>
+												<input type="radio" name="block2" id="block2_4" value="4" onClick="calculateAns();"> 
+												<span style="font-weight:bold">Severe</span> - flaccid (ie extreme hypotonia).  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-severe" target="_blank"> See video </a></div>
+											<div>
+												<input type="radio" name="block2" id="block2_5" value="0" checked="checked"  onClick="calculateAns();"> 
+												 <span style="font-weight:bold">Cannot Assess</span> </div>
+										</div>
+
+										<div class="quesBlock" id="quesBlock4"style="display:none">
+											<div style="width:98%;padding-bottom:10px;">
+												<span class="h3">Question 5 of 5 - Assess Reflexes</span>
+												<!-- <span class="h3" id="x" style="float:right;"onclick="changeQues(3);">Prev</span> -->
+											</div>
+											<div>
+												<span style="font-weight:bold;margin-right:15px">Suck</span>
+												<input type="radio" name="block4" id="block4_1" value="1" onClick="calculateAns();"> Strong Coordinated suck <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-video-normal" target="_blank">(See video) </a><br>
+												<input type="radio" name="block4" id="block4_2" value="2" onClick="calculateAns();" style="margin-left:52px;"> Uncoordinated <br>
+												<input type="radio" name="block4" id="block4_3" value="3" onClick="calculateAns();" style="margin-left:52px;"> Weak, uncoordinated or infant bites instead of sucking <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-moderate" target="_blank">(See video) </a> <br>
+												<input type="radio" name="block4" id="block4_4" value="4" onClick="calculateAns();" style="margin-left:52px;"> Absent <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-severe" target="_blank">(See video) </a><br>
+												<input type="radio" name="block4" id="block4_5" value="0" checked="checked" onClick="calculateAns();" style="margin-left:52px;"> Cannot Assess
+											</div>
+
+
+											<div><span style="font-weight:bold;margin-right:20px"><br>Gag</span>
+												<input type="radio" name="block5" id="block5_1" value="1" onClick="calculateAns();"> Normal
+												<input type="radio" name="block5" id="block5_2" value="3" onClick="calculateAns();"> Absent <br>
+												<input type="radio" name="block5" id="block5_3" value="0" checked="checked"  onClick="calculateAns();" style="margin-left:52px;"> Cannot Assess 
+
+											</div>
+											<div><span style="font-weight:bold;margin-right:10px"><br>Moro</span>
+												<input type="radio" name="block6" id="block6_1" value="1" onClick="calculateAns();"> Normal<a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-moro-video-normal" target="_blank"> (See video) </a>
+												<input type="radio" name="block6" id="block6_2" value="2" onClick="calculateAns();"> Exaggerated
+												<input type="radio" name="block6" id="block6_3" value="3" onClick="calculateAns();"> Incomplete
+												<input type="radio" name="block6" id="block6_4" value="4" onClick="calculateAns();"> Absent <br>
+												<input type="radio" name="block6" id="block6_5" value="0" checked="checked" onClick="calculateAns();" style="margin-left:52px;"> Cannot Assess
+
+											</div>
+										</div>
+									   
+										
+									</div>
+									<div id="btn">
+										<div id="msg" style="font-weight:bold;float:left;margin-left:5px;width:150px;line-height:35px;">Likely severity:</div>
+										<span id="result" style="font-weight:bold;color:#932047;line-height:35px;margin:0px;width:120px;float:left;">Unable to access</span> 
+										<input id="printBtn" type="Button" class="butstyle neuroButton" value="Print" onClick="fillPrintNeuroReport();">
+										<input id="evaluate" type="Button" class="butstyle neuroButton" value="Evaluate" onClick="closewin();">
+									</div>
+								</div>
+								</div>
+								</div>
+								
+								
+
+							</div>
+
+
+						</div>
+
+
+					</form>
+				</div> 
+
+
+
+
+				<div id="Disclaimer" class="resource" style="display:none">
+					<h5>Disclaimer</h5>
+					<h6>The User acknowledges and agrees that this tool will be used only as a reference aid, and that the information contained in the product is not intended to be (nor should it be used as) a substitute for the exercise of professional judgement.In view of the possibility of human error or changes in medical science, the User should confirm the information in the product through independent sources. This product is provided without warranties of any kind, express or implied, and the authors disclaim any liability, loss, or damage caused by it or its content.By continuing to use this product, you have indicated your acceptance of these terms..</h6>
+				</div>
+                <div name="footer" class="footer">
+                    BETA VERSION IS ONLY FOR USER TESTING OUTSIDE OF CLINICAL SETTING.<br>
+                    Disclaimer: These suggested guidelines are not a substitute for clinical judgement.
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>  This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+                    <!--<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>-->
+                </div>
+
+        </div> 
+
+        <!--<div class="footer-copy">Copyright &copy; 2017 - All Rights Reserved. HIE Calculator</div>-->
+
+
+        <script>
+          /*$("#f_GA_NA").click(function ()
+            {
+                if ($('#f_GA_NA').is(':checked')) {
+                       alert("Please estimate the gestational age using Ballard Maturational Assessment");
+                }
+            });*/
+               
+            var selected=[];
+            $("#f_events").find("input[type='checkbox']").change(function ()
+            {
+            var countOptions = $('#f_events :checked').length;
+            if(countOptions > 1){
+                                  if(($(this).val()=="1")&&($("#val1").is(':checked')))
+                                  {
+                                    $("#val2").prop('checked',false);
+                                    $("#val3").prop('checked',false);
+                                    $("#val4").prop('checked',false);
+                                    $("#val5").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                    $("#val7").prop('checked',false);
+                                    $("#val8").prop('checked',false);
+                                    $("#val9").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='6')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val2").prop('checked',false);
+                                    $("#val3").prop('checked',false);
+                                    $("#val4").prop('checked',false);
+                                    $("#val5").prop('checked',false);
+                                    $("#val7").prop('checked',false);
+                                    $("#val8").prop('checked',false);
+                                    $("#val9").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='2')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='3')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='4')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='5')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='7')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='8')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                  }
+                                  else if(($(this).val()=='9')&&($(this).is(':checked')))
+                                  {
+                                    $("#val1").prop('checked',false);
+                                    $("#val6").prop('checked',false);
+                                  }
+
+                
+            }
+                                if($('#f_events :checked').length==0){
+                                    $("#val1").prop('checked',true);}
+
+            });
+            
+            /*var selected=[];
+            $("#f_events").change(function ()
+                                  {
+                                  var countOptions = $('#f_events :checked').length;
+                                  if(countOptions > 1){
+                                  $('#f_events :checked').each(function(){
+                                                               if( $(this).val() == '1' || $(this).val() == '6'){
+                                                               $(this).prop('checked', false);
+                                                               
+                                                               
+                                                               
+                                                               }
+                                                               
+                                                               });
+                                  }
+                                  if($('#f_events :checked').length==0){
+                                  $("#val1").prop('checked',true);
+                                  }
+                                  
+                                  });*/
+               
+               
+            /*$( "#formybi" ).submit(function( event ) {
+                if ($('#f_GA_NA').is(':checked')) {
+                   alert("Please estimate the gestational age using Ballard Maturational Assessment");
+                   //return false;
+                   event.preventDefault();
+                }
+                    
+            });*/
+    
+    $(function () {
+  $('.videopopup').on('show.bs.modal', function (event) {
+      
+        alert($(this).attr('data-href'));
+      $('.modal-body').html($(this).attr('data-href'));
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var code = button.data('code'); // Extract info from data-* attributes
+    var company = button.data('company'); // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this);
+    modal.find('#code').val(code);
+    modal.find('#company').val(company);
+  });
+});
+    
+    
+    </script>
+        
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105224512-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script>
+    $(function(){
+      $("#nav-placeholder").load("navigation.html",function(){
+                                 $(document).ready(function () {
+                                                   $('.btnn1').addClass('active');
+                                                   });
+                                 });
+      });
+      
+    </script>
+<script type="text/javascript">
+    function closeFrame() {
+        document.getElementById("gmap").style.display="none";
+    }
+</script>
+
+    </body>
+</html>

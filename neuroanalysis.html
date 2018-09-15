@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+            <link href="css/style.css" rel="stylesheet">
+		<script type="text/javascript" src="scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Tangerine">
+    </head>
+    
+	<body style="margin-left:5%;margin-right:5%" onload="">
+        <div id="nav-placeholder">
+            
+        </div>
+
+        <div id="header" style="background-color:#98b4d2;height:90%;margin-left:3px;width:98.9%;"><h2 style="text-align:center;padding-top:20px;">Neonatal Neuro Tool</h2></div>
+        <div class="ques"style="margin-left:3px;width:99%;margin-top:3px">
+            <div style="width:220px;float:left;font-size:medium;">Time of life at neuro exam:</div>
+            <input type="number" min="0" style="width:40px;" id="hour_life"> Hr
+                <input type="number" min="0" style="width:40px;" id="min_life"> Min
+                    </div>
+        <div class="ques" style="margin-top:3px;margin-left:3px;width:99%;font-size:medium;">
+            <div class="item" style="width:100px"> <b>Seizures:</b></div>
+            <input type="checkbox" name="f_seizure" id="f_seizure_1" onClick="chkSeizures(this);" value="0"> No known episode
+                <input type="checkbox" name="f_seizure" id="f_seizure_2" onClick="chkSeizures(this);" value="1"> EEG Confirmed
+                    <input type="checkbox" name="f_seizure" id="f_seizure_3" onClick="chkSeizures(this);" value="2"> Suspected/Clinical
+                        <input type="text" style="height:30px;width:400px;float:right;margin-top:2px;margin-right:4px;display:none" Placeholder="Explain seizure" id="f_seizureBox">
+                            </div>
+        <table id="neuroHeader" style="width:99%;display:inline-table;margin:3px">
+            <tr>
+                <th style="min-height:35px;border:1px solid #74827D; border-style:solid solid solid solid;text-align:left;padding:10px;font-size:16px;color:black;font-weight:bold">
+                    ** Click to select characteristics for each row in the table below
+                    <!--<input type="button" id="btnChnageView" style="float:right;font-weight:normal;" class="butstyle" value="Switch to detailed view" onClick="changeDisplayNeuroAnalysis();">-->
+                </th>
+            </tr>
+        </table>
+        <div id="overflow" style="overflow-x:scroll;-webkit-overflow-scrolling: touch;width:100%;height:100%">
+            <table id="neuroTable" style="width:100%;height:100%;display:inline-table;margin-left:-12px;border-spacing:10px;border-collapse: separate;">
+                <tr style="font-size:small;">
+                    <th rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;">Level of Conciousness</th>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Opens eyes and moves with repeated tactile stimulation; appropriately wakes and falls
+                        back to sleep">Normal</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Irritable, hyperalert and/or agitated, maintains awake state, may have high pitched cry">Irritable/Hyperalert</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Reduced eye opening and movements to tactile stimulation">Lethargic/Obtunded</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Baby is unresponsive on only responds to painful stimuli, responses are stereotyped">Stupor/Unresponsive</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                </tr>
+                <tr>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-normal" target="_blank">See video </a>
+                    </th>
+                    <th style ="background-color:#C9D7E7">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-video-moderate" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                    </th>
+                    
+                </tr>
+                
+                <tr style="font-size:small;">
+                    <th rowspan="2" style="padding:8px;background-color:#ECF1F7;font-size:medium;" >Spontaneous Activity</th>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Spontaneous movements">Normal</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Excess movements, jittery, agitated">Jittery/Increased</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Decreased spontaneous movements, may respond to pain/touch">Decreased</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="No spontaneous movements">No Activity</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                </tr>
+                <tr>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-normal" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-mild" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-severe" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                    </th>
+                    
+                </tr>
+                
+                
+                <tr style="font-size:small;">
+                    <th rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;">Posture</th>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Normal">Normal</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Slight flexion/extension">Slight flexion/extension</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Distal Flexion/Complete Extension">Distal Flexion/Complete Extension</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Decerebrate">Decerebrate</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                </tr>
+                <tr>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-normal" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-mild" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-moderate" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                    </th>
+                    
+                </tr>
+                
+                
+                <tr style="font-size:small;">
+                    <th rowspan="2" style="padding:8px;background-color:#ECF1F7;font-size:medium;">Tone</th>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Flexed posture of arms and legs that is not fixed">Normal</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Mild excess fisting, high tone in the legs (hypertonia)">Increased</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Frog-legged and/or excess head lag">Hypotonic</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Extreme hypotonia)">Flaccid</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                </tr>
+                <tr>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-normal" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-mild" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-moderate" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-severe" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                    </th>
+                    
+                </tr>
+                
+                
+                <tr style="font-size:small;">
+                    <th rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;" >Suck</th>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Strong coordinated suck">Normal</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Uncoordinated">Uncoordinated</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Infant bites instead of sucking">Weak</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Absent">Absent</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection ">Cannot Assess</td>
+                </tr>
+                <tr>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-video-normal" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-moderate" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-video-severe" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                    </th>
+                    
+                </tr>
+                
+                <tr style="font-size:small;">
+                    <th rowspan="2" style="padding:8px;background-color:#ECF1F7;font-size:medium;" >Moro</th>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Normal">Normal</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Exagerated">Exagerated</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Incomplete">Incomplete</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Absent">Absent</td>
+                    <td style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                </tr>
+                <tr>
+                    <th style="background-color:#ECF1F7;">
+                        <a 
+                            href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-moro-video-normal" target="_blank">See video </a>
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#ECF1F7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#ECF1F7;"></th>
+                    
+                </tr>
+                
+                <tr style="font-size:small;">
+                    <th  rowspan="2" style="padding:8px;background-color:#C9D7E7;font-size:medium;" >Gag</th>
+                    <td  style="padding:8px;" id="NeuroTableCell" colspan=2 onClick="calculateResult(this);" title="Normal">Normal</td>
+                    <!-- <td onclick="calculateResult(this);">Normal</td> -->
+                    <!-- <td onclick="calculateResult(this);">Incomplete</td> -->
+                    <td  style="padding:8px;" id="NeuroTableCell" colspan=2 onClick="calculateResult(this);" title="Absent">Absent</td>
+                    <td  style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
+                </tr>
+                <tr>
+                    <th colspan="2" style="background-color:#C9D7E7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th colspan="2" style="background-color:#C9D7E7;">
+                        <!--<a 
+                            href="" target="_blank">See video </a>-->
+                    </th>
+                    <th style="background-color:#C9D7E7;">
+                    </th>
+                    
+                </tr>
+            </table>
+
+        </div>
+        
+            <!--<div id="neuroQues" style="display:none;width:98.6%">
+                <div  class="scrollBlock1" id="scrollBlock">
+                    <div id="span1" class="scroll1" onClick="changeQues(1);">Conciousness</div>
+                    <div id="span3" class="scrollDis1" onClick="changeQues(3);">Activity</div>
+                    <div id="span5" class="scrollDis1" onClick="changeQues(5);">Posture</div>
+                    <div id="span2" class="scrollDis1" onClick="changeQues(2);">Tone</div>
+                    <div id="span4" class="scrollDis1" onClick="changeQues(4);">Reflexes</div>
+             
+                </div>
+                <div class="quesBlock" id="quesBlock1" >
+                    <div style="width:98%;padding-bottom:10px;">
+                        <span class="h3" >Question 1 of 5 - Assess Level of Consciousness</span>
+                    </div>
+                    <div>
+                        <input type="radio" name="block1" id="block1_1" value="1" onClick="calculateAns();">
+                            <span style="font-weight:bold">Normal</span> - opens eyes and moves with repeated tactile stimulation; appropriately wakes and falls</br> back to sleep.
+                            <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-normal" target="_blank">
+                                See video </a>
+                    </div>
+                    <div>
+                        <input type="radio" name="block1" id="block1_2" value="2" onClick="calculateAns();">
+                            <span style="font-weight:bold">Mild</span> - Irritable, hyperalert and/or agitated, maintains awake state, may have high pitched cry
+                    </div>
+                    <div>
+                        <input type="radio" name="block1" id="block1_3" value="3" onClick="calculateAns();">
+                            <span style="font-weight:bold">Moderate</span> - Reduced eye opening and movements to tactile stimulation.
+                            <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-level-consciousness-video-moderate" target="_blank">
+                                See video </a>
+                    </div>
+                    <div>
+                        <input type="radio" name="block1" id="block1_4" value="4" onClick="calculateAns();">
+                            <span style="font-weight:bold">Severe</span> - Baby is unresponsive on only responds to painful stimuli, responses are stereotyped
+                    </div>
+                    <div>
+                        <input type="radio" name="block1" id="block1_5" value="0"  checked="checked"  onClick="calculateAns();">
+                        <span style="font-weight:bold">Cannot Assess</span> </div>
+                </div>
+             
+                <div class="quesBlock" id="quesBlock3" style="display:none">
+                    <div style="width:98%;padding-bottom:10px;">
+                        <span class="h3">Question 2 of 5 - Assess Activity</span>
+                    </div>
+                    <div>
+                        <input type="radio" name="block3" id="block3_1" value="1" onClick="calculateAns();">
+                            <span style="font-weight:bold">Normal</span> - spontaneous movements <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-normal" target="_blank"> See video </a> </div>
+                    <div>
+                        <input type="radio" name="block3" id="block3_2" value="2" onClick="calculateAns();">
+                            <span style="font-weight:bold">Mild</span> - excess movements, jittery, agitated. <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-mild" target="_blank"> See video </a> </div>
+                    <div>
+                        <input type="radio" name="block3" id="block3_3" value="3" onClick="calculateAns();">
+                        <span style="font-weight:bold">Moderate</span> - decreased spontaneous movements, may respond to pain/touch</div>
+                    <div>
+                        <input type="radio" name="block3" id="block3_4" value="4" onClick="calculateAns();">
+                            <span style="font-weight:bold">Severe</span> - no spontaneous movements. <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-severe" target="_blank"> See video </a></div>
+                    <div>
+                        <input type="radio" name="block3" id="block3_5" value="0" checked="checked"  onClick="calculateAns();">
+                        <span style="font-weight:bold">Cannot Assess</span> </div>
+             
+                </div>
+                <div class="quesBlock" id="quesBlock5" style="display:none">
+                    <div style="width:98%;padding-bottom:10px;">
+                        <span class="h3">Question 3 of 5 - Assess Posture</span>
+                    </div>
+                    <div>
+                        <input type="radio" name="block7" id="block7_1" value="1" onClick="calculateAns();">
+                            <span style="font-weight:bold">Normal</span> <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-normal" target="_blank"> See video </a> </div>
+                    <div>
+                        <input type="radio" name="block7" id="block7_2" value="2" onClick="calculateAns();">
+                            <span style="font-weight:bold">Mild</span> - Slight flexion/extension <a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-mild" target="_blank"> See video </a></div>
+                    <div>
+                        <input type="radio" name="block7" id="block7_3" value="3" onClick="calculateAns();">
+                            <span style="font-weight:bold">Moderate</span> - Distal Flexion/Complete Extension<a  style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-posture-video-moderate" target="_blank"> See video </a> </div>
+                    <div>
+                        <input type="radio" name="block7" id="block7_4" value="4" onClick="calculateAns();">
+                        <span style="font-weight:bold">Severe</span> -Decerebrate</div>
+                    <div>
+                        <input type="radio" name="block7" id="block7_5" value="0" checked="checked"  onClick="calculateAns();">
+                        <span style="font-weight:bold">Cannot Assess</div>
+                    
+                </div>
+                <div class="quesBlock" id="quesBlock2" style="display:none">
+                    <div style="width:98%;padding-bottom:10px;">
+                        <span class="h3">Question 4 of 5 - Assess Tone</span>
+                    </div>
+                    <div>
+                        <input type="radio" name="block2" id="block2_1" value="1" onClick="calculateAns();">
+                            <span style="font-weight:bold">Normal</span> - flexed posture of arms and legs that is not fixed.  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-normal" target="_blank"> See video </a></div>
+                    <div>
+                        <input type="radio" name="block2" id="block2_2" value="2" onClick="calculateAns();">
+                            <span style="font-weight:bold">Mild</span> - mild excess fisting, high tone in the legs (hypertonia).  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-mild" target="_blank"> See video </a></div>
+                    <div>
+                        <input type="radio" name="block2" id="block2_3" value="3" onClick="calculateAns();">
+                            <span style="font-weight:bold">Moderate</span> - frog-legged and/or excess head lag (hypotonia).  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-moderate" target="_blank"> See video </a></div>
+                    <div>
+                        <input type="radio" name="block2" id="block2_4" value="4" onClick="calculateAns();">
+                            <span style="font-weight:bold">Severe</span> - flaccid (ie extreme hypotonia).  <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-tone-video-severe" target="_blank"> See video </a></div>
+                    <div>
+                        <input type="radio" name="block2" id="block2_5" value="0" checked="checked"  onClick="calculateAns();">
+                        <span style="font-weight:bold">Cannot Assess</span> </div>
+                </div>
+                
+                <div class="quesBlock" id="quesBlock4"style="display:none">
+                    <div style="width:98%;padding-bottom:10px;">
+                        <span class="h3">Question 5 of 5 - Assess Reflexes</span>
+    
+                    </div>
+                    <div>
+                        <span style="font-weight:bold;margin-right:15px">Suck</span>
+                        <input type="radio" name="block4" id="block4_1" value="1" onClick="calculateAns();"> Strong Coordinated suck <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-video-normal" target="_blank">(See video) </a><br>
+                            <input type="radio" name="block4" id="block4_1" value="2" onClick="calculateAns();" style="margin-left:52px;"> Uncoordinated <br>
+                                <input type="radio" name="block4" id="block4_1" value="3" onClick="calculateAns();" style="margin-left:52px;"> Weak, uncoordinated or infant bites instead of sucking <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-moderate" target="_blank">(See video) </a> <br>
+                                    <input type="radio" name="block4" id="block4_1" value="4" onClick="calculateAns();" style="margin-left:52px;"> Absent <a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-severe" target="_blank">(See video) </a><br>
+                                        <input type="radio" name="block4" id="block4_1" value="0" checked="checked" onClick="calculateAns();" style="margin-left:52px;"> Cannot Assess
+                                            </div>
+                    
+                    
+                    <div><span style="font-weight:bold;margin-right:20px"><br>Gag</span>
+                        <input type="radio" name="block5" id="block5_1" value="1" onClick="calculateAns();"> Normal
+                            <input type="radio" name="block5" id="block5_2" value="3" onClick="calculateAns();"> Absent <br>
+                                <input type="radio" name="block5" id="block5_3" value="0" checked="checked"  onClick="calculateAns();" style="margin-left:52px;"> Cannot Assess 
+                                    
+                    </div>
+                    <div><span style="font-weight:bold;margin-right:10px"><br>Moro</span>
+                        <input type="radio" name="block6" id="block6_1" value="1" onClick="calculateAns();"> Normal<a style="text-decoration:underline;" href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-moro-video-normal" target="_blank"> (See video) </a>
+                            <input type="radio" name="block6" id="block6_1" value="2" onClick="calculateAns();"> Exaggerated
+                                <input type="radio" name="block6" id="block6_2" value="3" onClick="calculateAns();"> Incomplete
+                                    <input type="radio" name="block6" id="block6_3" value="4" onClick="calculateAns();"> Absent <br>
+                                        <input type="radio" name="block6" id="block6_4" value="0" checked="checked" onClick="calculateAns();" style="margin-left:52px;"> Cannot Assess
+                                            
+                    </div>
+                </div>
+
+            </div>-->
+  
+				<div id="printButton" style="margin-bottom:20px;margin-left:87%">
+                    <input class="butstyle" id="printConfirmNeuroAnalysis" style="width:150px;" type="Button" value="Print Analysis" onClick="fillPrintNeuroReport();">
+                </div>
+                <div name="footer" class="footer">
+                    BETA VERSION IS ONLY FOR USER TESTING OUTSIDE OF CLINICAL SETTING.<br>
+                    Disclaimer: These suggested guidelines are not a substitute for clinical judgement.
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>  This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+                    <!--<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>-->
+                </div>
+                <script>
+                    $(function(){
+                      $("#nav-placeholder").load("navigation.html",function(){
+                                                 $(document).ready(function () {
+                                                                   $('.btnn2').addClass('active');
+                                                                   });
+                                                 });
+                      });
+                      
+                    </script>
+
+    </body>
+</html>
