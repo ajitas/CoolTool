@@ -1878,3 +1878,4 @@ function fillPrintNeuroReport()
 
 
 }
+

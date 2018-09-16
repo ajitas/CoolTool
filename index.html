@@ -351,17 +351,15 @@
                                                 <td name="sa5" style="padding:8px;" id="NeuroTableCell" onClick="calculateResult(this);" title="Unsure about selection">Cannot Assess</td>
                                             </tr>
                                             <tr>
-                                                <th style="background-color:#ECF1F7;">
-                                                    <a 
-                                                        href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-video-normal" target="_blank">See video </a>
+												<th style="background-color:#ECF1F7;">
+                                                    <a class="video-link" data-target="#videoModal" data-toggle="modal" data-link="https://people.stanford.edu/wusthoff/sites/default/files/videos/normal_spont.mp4">See video </a>
                                                 </th>
                                                 <th style="background-color:#ECF1F7;">
                                                     <a 
                                                         href="https://people.stanford.edu/wusthoff/neurologic-exam-spontaneous-activity-mild" target="_blank">See video </a>
                                                 </th>
                                                 <th style="background-color:#ECF1F7;">
-                                                   <!--<a 
-                                                        href="content/video/neurologic-exam-spontaneous-activity-decreased.mp4" target="_blank">See video </a>-->
+                                                   <a class="video-link" data-target="#videoModal" data-toggle="modal" data-link="videos/neurologic-exam-spontaneous-activity-decreased.mp4">See video </a>
                                                 </th>
                                                 <th style="background-color:#ECF1F7;">
                                                     <a 
@@ -448,9 +446,8 @@
                                                     <a 
                                                         href="https://people.stanford.edu/wusthoff/neurologic-exam-primitive-reflexes-suck-video-normal" target="_blank">See video </a>
                                                 </th>
-                                                <th style="background-color:#C9D7E7;">
-                                                    <!--<a 
-                                                        href="content/video/neurologic-exam-suck-uncoordinated.mp4" target="_blank">See video </a>-->
+												<th style="background-color:#C9D7E7;">
+													<a class="video-link" data-target="#videoModal" data-toggle="modal" data-link="videos/neurologic-exam-suck-uncoordinated.mp4">See video </a>
                                                 </th>
                                                 <th style="background-color:#C9D7E7;">
                                                     <a 
@@ -483,8 +480,7 @@
                                                         href="" target="_blank">See video </a>-->
                                                 </th>
                                                 <th style="background-color:#ECF1F7;">
-                                                    <!--<a 
-                                                        href="content/video/neurologic-exam-moro-incomplete.mp4" target="_blank">See video </a>-->
+													<a class="video-link" data-target="#videoModal" data-toggle="modal" data-link="videos/neurologic-exam-moro-incomplete.mp4">See video </a>
                                                 </th>
                                                 <th style="background-color:#ECF1F7;">
                                                     <!--<a 
@@ -517,25 +513,27 @@
                                             </tr>
                                         </table>
 										
-										<div id="myModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-
-		<!-- Modal content-->
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Modal Header</h4>
-		  </div>
-		  <div class="modal-body">
-			<p>Some text in the modal.</p>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		  </div>
-		</div>
-
-	  </div>
-	</div>
+										<!-- Modal -->
+								<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+										<h5 class="modal-title" id="videoModalLabel"></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										</div>
+										<div class="modal-body text-center">
+											<video id ="popupvideo" width="320" height="240" controls>
+												
+											  </video>
+										</div>
+										<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+									</div>
+								</div>
 										
 										
 										
@@ -826,20 +824,16 @@
                     
             });*/
     
-    $(function () {
-  $('.videopopup').on('show.bs.modal', function (event) {
-      
-        alert($(this).attr('data-href'));
-      $('.modal-body').html($(this).attr('data-href'));
-    var button = $(event.relatedTarget); // Button that triggered the modal
-    var code = button.data('code'); // Extract info from data-* attributes
-    var company = button.data('company'); // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this);
-    modal.find('#code').val(code);
-    modal.find('#company').val(company);
-  });
+    
+
+$(".video-link").on("click",function(){
+    var videosrc = $(this).attr("data-link");
+	var videosourceTag = $("<source>");
+	videosourceTag.attr("src",videosrc);
+	videosourceTag.attr("type","video/mp4");
+
+	$("#popupvideo>source").remove();
+	$("#popupvideo").append(videosourceTag);
 });
     
     

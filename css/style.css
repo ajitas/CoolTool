@@ -651,6 +651,10 @@ a
 a:hover{
 	color: blue;
 }
+
+.video-link:hover {
+    cursor:pointer;
+}
 @media (max-width:768px){
 
 .babycare-form input, textarea { margin-bottom:20px;}
