@@ -532,16 +532,7 @@ input[type=number]{
  }*/
  
 #neuroTable td.active{color:white;}
-.navbar-nav > .active{
-    color: blue;
-    background: #d65c14;
-}
-.navbar-nav > .active > a,
-.navbar-nav > .active > a:hover,
-.navbar-nav > .active > a:focus {
-    color:blue;
-    background: #d65c14;
-}
+.active-tab { color:blue;}
 	
 	#popup
 {

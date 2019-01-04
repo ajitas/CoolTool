@@ -196,11 +196,13 @@
 									<div class="buildformpart">
 										<div class="boxrecom">
 											<ul class="list-unstyled" style="list-style:none">
-												<li id="r2" style="display:none;margin-top:10px;list-style:none"> <span style="font-weight:bold;font-size:16px;background-color:#00d790">SCREENING CRITERIA <u>NOT</u> MET</span> <br> Current evidence does not support the initiation of cooling therapy in infants <35 weeks GA.<a href="content/cooling_criteria.png" target="_blank"><i>Learn More. </i></a><br><br><b>Note:</b> Contact <a href ="#" onClick="callCoolingCenter();" >Cooling Center</a> to discuss any possible qualifying exceptions or special circumstances for cooling. Recommend performing <a href="content/Template-Questionnaire.pdf" target="_blank"> Neurological Assessment</a> prior to the consultation.<br><br><b> Ongoing trials for cooling in infants with GA 33 0/7 to 35 6/7:</b> <br> Preemie Hypothermia for Neonatal encephalopathy (NCT01793129)<br> Contact: Stanford University <br> Palo Alto, California, United States, 94304 <br> Contact: Krisa P. Van Meurs, MD:  xxx-xx-xxxx </li>
+												<li id="r2" style="display:none;margin-top:10px;list-style:none"> <span style="font-weight:bold;font-size:16px;background-color:#00d790">SCREENING CRITERIA <u>NOT</u> MET</span> <br> Current evidence does not support the initiation of cooling therapy in infants &lt;35 weeks GA.<a href="content/cooling_criteria.png" target="_blank"><i>Learn More. </i></a><br><br><b>Note:</b> Contact <a href ="#" onClick="callCoolingCenter();" >Cooling Center</a> to discuss any possible qualifying exceptions or special circumstances for cooling. Recommend performing <a href="content/Template-Questionnaire.pdf" target="_blank"> Neurological Assessment</a> prior to the consultation.<br><br><b> Ongoing trials for cooling in infants with GA 33 0/7 to 35 6/7:</b> <br> Preemie Hypothermia for Neonatal encephalopathy (NCT01793129)<br> Contact: Stanford University <br> Palo Alto, California, United States, 94304 <br> Contact: Krisa P. Van Meurs, MD:  xxx-xx-xxxx </li>
 												<li id="r3" style="display:none;margin-top:10px;list-style:none"><span style="font-weight:bold;font-size:16px;background-color: #00d790">SCREENING CRITERIA <u>NOT</u> MET</span><a href="content/cooling_criteria.png" target="_blank"><i>Learn Why. </i></a><br>Current evidence does not support the initiation of cooling therapy beyond 6 hours of life.</li>
 												<li id="r3_1" style="display:none;margin-top:10px;list-style:none"> However, infant has risk factors for Neonatal Encephalopathy. Recommend <a href="content/Template-Questionnaire.pdf" target="_blank"> Neurological assessment</a> and clinical correlation.</li>
 												<li id="r4" style="display:none;margin-top:10px;list-style:none"><b> Note:</b> Infant may have met criteria if age were <=6hr. <a href ="#" onClick="callCoolingCenter();" >Contact Cooling Center</a> to discuss any possible qualifying exceptions or special circumstances for cooling. Recommend performing <a href="content/Template-Questionnaire.pdf" target="_blank"> Neurological Assessment</a> prior to the consultation.</li>
 												<li id="r5" style="display:none;margin-top:10px;list-style:none"><span style="font-weight:bold;font-size:16px;background-color: #00d790">SCREENING CRITERIA <u>NOT</u> MET</span><a href="content/cooling_criteria.png" target="_blank"><i>Learn Why. </i></a> <br> Recommend clinical correlation. Continue care as appropriate.</li>
+												<li id="r5_1" style="display:none;margin-top:10px;list-style:none"><span style="font-weight:bold;font-size:16px;background-color: yellow">AT RISK</span><br> Recommend clinical corelation</li>
+
 											</ul>
 											<div id="recoCooling" style="display:none;list-style:none">
 												<div id="childdrawage" class="clockbaby"><img id="childrawImg" src="images/clock1.png"></div>
@@ -865,7 +867,7 @@ $(".video-link").on("click",function(){
     $(function(){
       $("#nav-placeholder").load("navigation.html",function(){
                                  $(document).ready(function () {
-                                                   $('.btnn1').addClass('active');
+												   $('.btnn1').addClass('active active-tab');
                                                    });
                                  });
       });

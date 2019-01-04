@@ -11,6 +11,8 @@ var flagMod;
 var flagSev;
 var flagUTA;
 
+var flagNoRiskFactor = false;
+
 var flagTemp;
 var displayMode=1;
 
@@ -22,6 +24,7 @@ var flag_r3 =0;
 var flag_r3_1 =0;
 var flag_r4 =0;
 var flag_r5 =0;
+var flag_r5_1 =0;
 var flag_r6 =0;
 var flag_r6_1 =0;
 var flag_r7 =0;
@@ -190,7 +193,7 @@ function submitPage(elt)
 					checkGas(cordPH, cordBE,infantPH, infantBE);
 					highlightCriteriaMet(sentEvent, apgar, infantPH, infantBE, cordPH, cordBE, assistVent, cpr); //highlight clinical value that meet criteria
                     //if(cordPH!='' && infantPH!='')
-                        performNeuroExam();
+                    performNeuroExam();
 
 				}
 
@@ -230,9 +233,10 @@ function submitPage(elt)
 				}
 			} else 
 
-			{ //-ve screen ~ all inputs vaialble & didnt qualify
-				document.getElementById("r5").style.display = "list-item";
-                flag_r5=1;
+            { //-ve screen ~ all inputs vaialble & didnt qualify
+                performNeuroExam();
+                flagNoRiskFactor=true;
+				
 			}
 		}
       }
@@ -516,7 +520,20 @@ function back2Main(){
     document.getElementById("r7").style.display = "none";
     document.getElementById("r7_1").style.display = "none";*/
     document.getElementById("r11").style.display = "none";
-	document.getElementById("neuroResult").style.display = "inline";
+    document.getElementById("neuroResult").style.display = "inline";
+    if(stage_tab==='Normal' && flagNoRiskFactor){
+        document.getElementById("r8").style.display = "none";
+        document.getElementById("r9").style.display = "none";
+        document.getElementById("r5").style.display = "list-item";
+        flag_r5=1;
+    }
+    else if(flagNoRiskFactor){
+        document.getElementById("r8").style.display = "none";
+        document.getElementById("r9").style.display = "none";
+        document.getElementById("r5_1").style.display = "list-item";
+        flag_r5_1=1;
+    }
+
 	if((stage_tab=='Moderate')||(stage_tab=='Severe'))
 	{
 		tableFlag='Moderate to Severe';
@@ -914,6 +931,8 @@ function clearRec(){
     flag_r4=0;
 	document.getElementById("r5").style.display = "none";
     flag_r5=0;
+    document.getElementById("r5_1").style.display = "none";
+    flag_r5_1=0;
 	document.getElementById("r6").style.display = "none";
     flag_r6=0;
 	document.getElementById("r6_1").style.display = "none";
@@ -1213,6 +1232,7 @@ function evaluateNeuroTest(mode){
      flagSev=0;
      flagUTA=1;
      valSeizure=0;
+     flagNoRiskFactor=false;
      
      document.getElementById("result").innerHTML="Unable to Assess";
      
@@ -1222,6 +1242,7 @@ function evaluateNeuroTest(mode){
      flag_r3_1 =0;
      flag_r4 =0;
      flag_r5 =0;
+     flag_r5_1 =0;
      flag_r6 =0;
      flag_r6_1 =0;
      flag_r7 =0;
@@ -1475,6 +1496,8 @@ function fillPrintReport(){
         recom = recom + '|' + document.getElementById("r4").textContent;
     if(flag_r5==1)
         recom = recom + '|' + document.getElementById("r5").textContent;
+    if(flag_r5_1==1)
+        recom = recom + '|' + document.getElementById("r5_1").textContent;
     if(flag_r6==1)
         recom = recom + '|' + document.getElementById("r6").textContent;
     if(flag_r6_1==1)
