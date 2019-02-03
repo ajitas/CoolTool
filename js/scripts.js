@@ -246,7 +246,7 @@ function submitPage(elt)
 function checkcpqcc(sentEvent, apgar, ph, be, assistVent, cpr)
  {
 	 var cpqcc = 0;
-	 if ((sentEvent !=1 && sentEvent !=6)|| (apgar <=6 && apgar!='')||document.getElementById('f_vent_Y').checked ||(cpr!=5 && cpr !=1)||(ph<=7&& ph!='')|| be>=10){
+	 if ((sentEvent !=1 && sentEvent !=6)|| (apgar <=6 && apgar!='')||document.getElementById('f_vent_Y').checked ||(cpr!=5 && cpr !=1)||(ph<=7.15&& ph!='')|| be>=10){
 	 	cpqcc=1;
 	 }
 	return cpqcc;
@@ -288,7 +288,7 @@ function checkGas(cordPH, cordBE,infantPH, infantBE)
     }
     else if(infantPH==""&&infantBE=="")
     {
-        if ((cordPH<=7&& cordPH!='')|| cordBE>=10)
+        if ((cordPH<=7.15&& cordPH!='')|| cordBE>=10)
         {
             document.getElementById("r7_1").style.display = "list-item";
             flag_r7_1=1;
@@ -357,13 +357,13 @@ function highlightCriteriaMet(sentEvent, apgar, infantPH, infantBE, cordPH, cord
 				if (sentEvent !=1 && sentEvent !=6){
 					document.getElementById("f_events").style.background='#FFFF00';
 				}
-				if (cordPH<=7 && cordPH!=""){
+				if (cordPH<=7.15 && cordPH!=""){
 					document.getElementById("f_cordpH").style.background='#FFFF00';
 				}
 				if (cordBE>=10){
 					document.getElementById("f_cordBE").style.background='#FFFF00';
 				}
-				if (infantPH<=7 && infantPH!=""){
+				if (infantPH<=7.15 && infantPH!=""){
 					document.getElementById("f_infantpH").style.background='#FFFF00';
 				}
 				if (infantBE>=10){
